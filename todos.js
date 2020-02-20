@@ -12,6 +12,15 @@ class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { todos: props.todos };
+        this.deleteItem = this.deleteItem.bind(this);
+    }
+
+    deleteItem(deleteIdx) {
+        this.setState(state => {
+            return {
+                todos: state.todos.filter(todo => todo.id != deleteIdx)
+            };
+        });
     }
 
     render() {
@@ -21,6 +30,7 @@ class TodoList extends React.Component {
             this.state.todos.map(todo => {
                 let itemProps = { ...todo };
                 itemProps.key = todo.id;
+                itemProps.deleteItem = this.deleteItem;
 
                 return e(TodoItem, itemProps);
             })
@@ -30,13 +40,25 @@ class TodoList extends React.Component {
 
 class TodoItem extends React.Component {
     render() {
-        return e('li', { className: 'todo-list-item' }, this.props.text, e(TodoItemDeleteButton, { id: this.props.id }));
+        return e(
+            'li',
+            { className: 'todo-list-item' },
+            this.props.text,
+            e(TodoItemDeleteButton, { id: this.props.id, clickAction: this.props.deleteItem })
+        );
     }
 }
 
 class TodoItemDeleteButton extends React.Component {
     render() {
-        return e('button', { className: 'todo-list-item__delete' } , 'Delete');
+        return e(
+            'button',
+            {
+                className: 'todo-list-item__delete',
+                onClick: () => this.props.clickAction(this.props.id)
+            } ,
+            'Delete'
+        );
     }
 }
 
