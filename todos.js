@@ -44,22 +44,19 @@ class TodoItem extends React.Component {
             'li',
             { className: 'todo-list-item' },
             this.props.text,
-            e(TodoItemDeleteButton, { id: this.props.id, clickAction: this.props.deleteItem })
+            e(
+                'button',
+                {
+                    className: 'todo-list-item__delete',
+                    onClick: () => this.props.deleteItem(this.props.id)
+                },
+                'Delete'
+            )
         );
     }
 }
 
-class TodoItemDeleteButton extends React.Component {
-    render() {
-        return e(
-            'button',
-            {
-                className: 'todo-list-item__delete',
-                onClick: () => this.props.clickAction(this.props.id)
-            } ,
-            'Delete'
-        );
-    }
-}
-
-const domContainer = ReactDOM.render(e(TodoList, { todos: todos }), document.querySelector('#todos-container'));
+const domContainer = ReactDOM.render(
+    e(TodoList, { todos: todos }),
+    document.querySelector('#todos-container')
+);
