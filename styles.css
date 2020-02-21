@@ -11,13 +11,7 @@ body {
     color: #594031;
 }
 
-.todo-list-item {
-    border-bottom: 1px dashed;
-}
-
-.todo-list-item__delete {
-    float: right;
-
+button {
     margin-top: 0.5em;
     padding: 0.5em;
 
@@ -30,6 +24,27 @@ body {
     cursor: pointer;
 }
 
+.todo-list-item {
+    border-bottom: 1px dashed;
+}
+
+.todo-list-item__delete {
+    float: right;
+}
+
 .todo-list-item__delete:active {
     border: none;
+}
+
+.todo-list__new-item-header {
+    font-size: 1.3em;
+}
+
+.todo-list__new-item-input {
+    font-size: 1.1em;
+    padding: 0.5em;
+}
+
+.todo-list__new-item-submit {
+    float: right;
 }
